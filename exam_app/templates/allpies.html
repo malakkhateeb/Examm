@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Shows</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Baker</th>
+            <th>Votes</th>
+        </tr>
+        {% for pie in pies %}
+        <tr>
+            <td><a href="/pies/{{ pie.id }}">{{ pie.name }}</a></td>
+            <td>{{pie.made_by.firstname}} {{pie.made_by.lastname}}</td>
+            <td><a href="/pies/{{ pie.id }}/favorite"></a>{{pie.users_who_like.count}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <a href="/dashboard">Back to my Pies</a> 
+    <a href="/logout">Log out</a> 
+    
+</body>
+</html>

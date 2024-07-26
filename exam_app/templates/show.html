@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.firstname }}</h1> 
+    <hr>
+    <h1>{{pie.name}}</h1>
+    <h2>{{ pie.filling }}</h2>
+    <h2>{{ pie.crust }}</h2>
+    <p>Cast a vote</p>
+    {% if user in pie.users_who_like.all %}
+        <form action="/pies/{{pie.id}}/unfavorite" method="post">
+            {% csrf_token %}
+            <button type="submit">Delicious</button>
+        </form>
+    {% else %}
+        <form action="/pies/{{pie.id}}/favorite" method="post">
+            {% csrf_token %}
+            <button type="submit">un-Delicious</button>
+        </form>
+    {% endif %}
+    <a href="/dashboard">Back to my Pies</a> 
+    <a href="/logout">Log out</a> 
+    
+</body>
+</html>

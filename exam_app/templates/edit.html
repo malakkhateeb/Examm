@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+    <h1>Edit, {{ pie.name }}</h1>
+    <hr>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li style="color: red;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    {% endif %}
+    </ul>
+    <form action="/pies/{{ pie.id }}/update" method="post">
+        {% csrf_token %}
+        Name:
+        <input type="text" name="name" value="{{ pie.name }}">
+        Filling:
+        <input type="text" name="filling" value="{{ pie.filling }}">
+        Crust
+        <input type="text" name="crust" value="{{ pie.crust }}">
+        <hr>
+        <button type="submit">Update Pie</button>
+    </form>
+    <a href="/dashboard">Back to my Pies</a> 
+    <a href="/logout">Log out</a> 
+</body>
+    <!-- <p>Added by: {{ book.uploaded_by.firstname }} {{ book.uploaded_by.lastname }}</p>
+    <p>Added on: {{ book.created_at }}</p>
+    <p>Last updated at: {{ book.updated_at }}</p>
+    <form action="/books/delete" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ book.id }}">
+        <button type="submit">Delete</button>
+    </form>
+    <ul>
+        <p>Users who like the book:</p>
+        {% for user in book.users_who_like.all %}
+        <li>{{ user.firstname }} <a href="/books/{{ book.id }}/unfavorite">Un-Favorite</a></li>
+        {% endfor %}
+    </ul>
+    <a href="/books">Go Back</a>
+</body>
+</html>  -->

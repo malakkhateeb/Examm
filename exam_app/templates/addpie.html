@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>authors</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.firstname }}</h1>
+    <h>Pies by {{user.firstname }}</h>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+        {% for pie in pies %}
+            <td>{{pie.name}}</td>
+            {% if user == pie.made_by %}
+            <td>
+            <form action="/pies/delete" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ pie.id }}">
+                <button type="submit">Delete</button> 
+            <a href="/pies/{{ pie.id }}/update">Edit</a>
+
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    <h1>Add a new Pie</h1>
+    <form action="/pies/add" method="post">
+        {% csrf_token %}
+        <label for="fname"> Name: </label>
+        <input type="text" name="name" id="fname">
+        <label for="fil"> Filling: </label>
+        <input type="text" name="filling" id="fil">
+        <label for="crus"> Crust:</label>
+        <input type="text" name="crust" id="crus">
+        <button type="submit" name=""> Add pie </button>
+    </form>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li style="color: red;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="/piess">Go to all pies</a>
+    <a href="/logout">Log out</a> 
+    
+
+</body>
+</html>
